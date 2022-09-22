@@ -22,12 +22,12 @@ const App = () => {
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPositions, setDemSliderPositions] = useState([30, 50]);
+  const [demSliderPositions, setDemSliderPositions] = useState([30, 45]);
 
   /**
    * This is a duplicate state but for the republican candidate.
    */
-  const [repSliderPositions, setRepSliderPositions] = useState([30, 50]);
+  const [repSliderPositions, setRepSliderPositions] = useState([30, 45]);
 
   const handleDemChange = (event, newValue) => {
     setDemSliderPositions(newValue);
@@ -50,7 +50,7 @@ const App = () => {
       100;
 
   return (
-    <div>
+    <div className="app">
       <h1>Voter Turnout Prediction Calculator</h1>
       <h2>Based on results from the 2018 gubernatorial election</h2>
       <Grid container spacing={2}>
@@ -76,23 +76,27 @@ const App = () => {
             }}
             value={demSliderPositions}
             onChange={handleDemChange}
-            valueLabelDisplay="auto"
+            valueLabelDisplay="off"
           />
         </Grid>
         <Grid item xs={3}>
           {votesForDemocrat >= votesForRepublican ? (
-            <h1>Hochul wins</h1>
+            <h1 className="color-dem">Hochul wins</h1>
           ) : (
-            <h1>Zeldin wins</h1>
+            <h1 className="color-rep">Zeldin wins</h1>
           )}
-          <p>{Math.round(votesForDemocrat)} votes for Hochul.</p>
-          <p>{Math.round(votesForRepublican)} votes for Zeldin.</p>
+          <p>
+            {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
+          </p>
+          <p>
+            {Math.round(votesForRepublican).toLocaleString()} votes for Zeldin.
+          </p>
         </Grid>
         <Grid item xs={3}>
           <p>{voterData[2018].repCandidate.name}''s voters are split:</p>
-          <p className="color-rep">{100 - repSliderPositions[1]}% for Hochul</p>
+          <p className="color-rep">{100 - repSliderPositions[1]}% for Zeldin</p>
           <p className="color-dem">
-            {repSliderPositions[1] - repSliderPositions[0]}% for Zeldin
+            {repSliderPositions[1] - repSliderPositions[0]}% for Hochul
           </p>
           <p>{repSliderPositions[0]}% don't vote</p>
           <Slider
@@ -107,7 +111,7 @@ const App = () => {
             }}
             value={repSliderPositions}
             onChange={handleRepChange}
-            valueLabelDisplay="auto"
+            valueLabelDisplay="off"
           />
         </Grid>
       </Grid>

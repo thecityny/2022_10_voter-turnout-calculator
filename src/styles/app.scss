@@ -14,12 +14,20 @@ $city-gold: #fcc32c;
 $city-politics-red: #d02d3c;
 $city-politics-blue: #214da5;
 
-.color-dem {
-  color: $city-politics-blue;
-}
+.app {
+  font-family: "Sharp Grotesk", Helvetica, sans-serif;
+  padding: 1rem;
 
-.color-rep {
-  color: $city-politics-red;
+  p {
+  }
+
+  .color-dem {
+    color: $city-politics-blue;
+  }
+
+  .color-rep {
+    color: $city-politics-red;
+  }
 }
 
 // Material UI Overrides:
