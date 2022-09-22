@@ -4,6 +4,19 @@ import Grid from "@mui/material/Grid";
 
 import "./styles/app.scss";
 
+const voterData = {
+  2018: {
+    demCandidate: {
+      name: "Cuomo",
+      votes: 3635340,
+    },
+    repCandidate: {
+      name: "Molinaro",
+      votes: 2207602,
+    },
+  },
+};
+
 const App = () => {
   /**
    * This state holds the positions of the two break points on the slider widget
@@ -24,6 +37,18 @@ const App = () => {
     setRepSliderPositions(newValue);
   };
 
+  const votesForDemocrat =
+    (voterData[2018].demCandidate.votes * (100 - demSliderPositions[1])) / 100 +
+    (voterData[2018].repCandidate.votes *
+      Math.abs(repSliderPositions[0] - repSliderPositions[1])) /
+      100;
+
+  const votesForRepublican =
+    (voterData[2018].repCandidate.votes * (100 - repSliderPositions[1])) / 100 +
+    (voterData[2018].demCandidate.votes *
+      Math.abs(demSliderPositions[0] - demSliderPositions[1])) /
+      100;
+
   return (
     <div>
       <h1>Voter Turnout Prediction Calculator</h1>
@@ -33,7 +58,7 @@ const App = () => {
           <h2>IF:</h2>
         </Grid>
         <Grid item xs={3}>
-          <p>Biden's voters are split:</p>
+          <p>{voterData[2018].demCandidate.name}'s voters are split:</p>
           <p className="color-dem">{100 - demSliderPositions[1]}% for Hochul</p>
           <p className="color-rep">
             {demSliderPositions[1] - demSliderPositions[0]}% for Zeldin
@@ -55,7 +80,16 @@ const App = () => {
           />
         </Grid>
         <Grid item xs={3}>
-          <p>Trump's voters are split:</p>
+          {votesForDemocrat >= votesForRepublican ? (
+            <h1>Hochul wins</h1>
+          ) : (
+            <h1>Zeldin wins</h1>
+          )}
+          <p>{Math.round(votesForDemocrat)} votes for Hochul.</p>
+          <p>{Math.round(votesForRepublican)} votes for Zeldin.</p>
+        </Grid>
+        <Grid item xs={3}>
+          <p>{voterData[2018].repCandidate.name}''s voters are split:</p>
           <p className="color-rep">{100 - repSliderPositions[1]}% for Hochul</p>
           <p className="color-dem">
             {repSliderPositions[1] - repSliderPositions[0]}% for Zeldin
