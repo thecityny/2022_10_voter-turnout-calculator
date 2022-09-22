@@ -24,13 +24,26 @@ $city-politics-blue: #214da5;
 
 // Material UI Overrides:
 
-.MuiSlider-track {
-  color: $city-politics-red;
+.dem-slider {
+  .MuiSlider-track {
+    color: $city-politics-red;
+  }
+
+  .MuiSlider-rail {
+    color: $city-politics-blue;
+    opacity: 1;
+  }
 }
 
-.MuiSlider-rail {
-  color: $city-politics-blue;
-  opacity: 1;
+.rep-slider {
+  .MuiSlider-track {
+    color: $city-politics-blue;
+  }
+
+  .MuiSlider-rail {
+    color: $city-politics-red;
+    opacity: 1;
+  }
 }
 
 .MuiSlider-thumb {
@@ -38,12 +51,23 @@ $city-politics-blue: #214da5;
 }
 
 @for $i from 1 through 100 {
-  .slider-position-#{$i} .MuiSlider-rail {
-    background: linear-gradient(
-      180deg,
-      $city-politics-blue (100 - $i) * 1%,
-      black (100 - $i) * 1%
-    );
-    opacity: 1;
+  .slider-position-#{$i} {
+    &.dem-slider .MuiSlider-rail {
+      background: linear-gradient(
+        180deg,
+        $city-politics-blue (100 - $i) * 1%,
+        black (100 - $i) * 1%
+      );
+      opacity: 1;
+    }
+
+    &.rep-slider .MuiSlider-rail {
+      background: linear-gradient(
+        180deg,
+        $city-politics-red (100 - $i) * 1%,
+        black (100 - $i) * 1%
+      );
+      opacity: 1;
+    }
   }
 }
