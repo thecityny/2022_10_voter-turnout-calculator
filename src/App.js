@@ -1,10 +1,30 @@
-function App() {
+import React from 'react';
+import { Grommet, Heading } from 'grommet';
+
+import "./styles/app.scss"
+
+const theme = {
+  global: {
+    colors: {
+      blue: '#0C71FA',
+      orange: '#FA7416',
+      purple: '#A9328A',
+      green: '#36C269',
+      yellow: '#FCC32C',
+    },
+    font: {
+      family: 'Sharp Grotesk',
+      size: '22px',
+      height: '22px',
+    },
+  },
+};
+
+const App = () => {
   return (
-    <div className="App">
+    <Grommet theme={theme}>
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Heading level={1} color="purple"> My app </ Heading>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -14,7 +34,7 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </Grommet>
   );
 }
 
