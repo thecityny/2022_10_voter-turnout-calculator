@@ -1,40 +1,42 @@
-import React from 'react';
-import { Grommet, Heading } from 'grommet';
+import React, { useState } from 'react';
+import Slider from '@mui/material/Slider';
+import Grid from '@mui/material/Grid';
 
 import "./styles/app.scss"
 
-const theme = {
-  global: {
-    colors: {
-      blue: '#0C71FA',
-      orange: '#FA7416',
-      purple: '#A9328A',
-      green: '#36C269',
-      yellow: '#FCC32C',
-    },
-    font: {
-      family: 'Sharp Grotesk',
-      size: '22px',
-      height: '22px',
-    },
-  },
-};
-
 const App = () => {
+
+  const [value, setValue] = useState([50, 70]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  
   return (
-    <Grommet theme={theme}>
-      <header className="App-header">
-        <Heading level={1} color="purple"> My app </ Heading>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </Grommet>
+    <div>
+      <h1>Voter Turnout Prediction Calculator</h1>
+      <h2>Based on resutls from the 2018 gubernatorial election</h2>
+      <Grid container spacing={2}>
+        <Grid item xs={1}>
+          <h2>IF:</h2>
+        </Grid>
+        <Grid item xs={3}>
+      <Slider
+        getAriaLabel={() => 'Temperature range'}
+        orientation="vertical"
+        sx={{
+          height: 300,
+          '& input[type="range"]': {
+            WebkitAppearance: 'slider-vertical',
+          },
+        }}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+      />
+      </Grid>
+      </Grid>
+    </div>
   );
 }
 
