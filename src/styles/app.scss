@@ -1,1 +1,36 @@
-@import "_fonts.scss"
+@import "_fonts.scss";
+
+/*
+ * Colors
+ */
+$city-white: #ebebeb;
+$city-grey: #8c8c8c;
+$city-black: #111111;
+$city-orange: #FA7416;
+$city-purple: #A9328A;
+$city-green: #36C269;
+$city-blue: #0C71FA;
+$city-gold: #FCC32C;
+$city-politics-red: #D02D3C;
+$city-politics-blue: #214DA5;
+
+
+.MuiSlider-track {
+    color: $city-politics-red;
+}
+
+.MuiSlider-rail {
+    color: $city-politics-blue;
+    opacity: 1;
+}
+
+.MuiSlider-thumb {
+    color: $city-grey;
+}
+
+@for $i from 1 through 100 {
+    .slider-position-#{$i} .MuiSlider-rail { 
+        background: linear-gradient(180deg, $city-politics-blue (100 - $i) * 1%, black (100 - $i) * 1%);
+        opacity: 1;
+    }
+}
