@@ -18,7 +18,13 @@ const voterData = {
   },
 };
 
-const VoteSlider = ({ sliderPositions, handleChange, candidateType }) => {
+type CandidateType = "demCandidate" | "repCandidate";
+
+const VoteSlider: React.FC<{
+  sliderPositions: [number, number];
+  handleChange: (event: Event, value: number | number[]) => void;
+  candidateType: CandidateType;
+}> = ({ sliderPositions, handleChange, candidateType }) => {
   return (
     <Grid item xs={3}>
       <p>{voterData[2018][candidateType].name}'s voters are split:</p>
@@ -67,12 +73,16 @@ const App = () => {
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPositions, setDemSliderPositions] = useState([30, 45]);
+  const [demSliderPositions, setDemSliderPositions] = useState<
+    [number, number]
+  >([30, 45]);
 
   /**
    * This is a duplicate state but for the republican candidate.
    */
-  const [repSliderPositions, setRepSliderPositions] = useState([30, 45]);
+  const [repSliderPositions, setRepSliderPositions] = useState<
+    [number, number]
+  >([30, 45]);
 
   const handleDemChange = (event, newValue) => {
     setDemSliderPositions(newValue);
@@ -105,7 +115,6 @@ const App = () => {
         <VoteSlider
           sliderPositions={demSliderPositions}
           handleChange={handleDemChange}
-          candidateName={voterData[2018].demCandidate.name}
           candidateType="demCandidate"
         />
         <Grid item xs={3}>
@@ -124,7 +133,6 @@ const App = () => {
         <VoteSlider
           sliderPositions={repSliderPositions}
           handleChange={handleRepChange}
-          candidateName={voterData[2018].repCandidate.name}
           candidateType="repCandidate"
         />
       </Grid>
