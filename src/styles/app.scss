@@ -29,6 +29,10 @@ $city-politics-blue: #214da5;
 
 // Material UI Overrides:
 
+.MuiInputBase-formControl fieldset legend {
+  display: none;
+}
+
 @mixin slider($type) {
   .MuiSlider-thumb {
     border-radius: 5%;

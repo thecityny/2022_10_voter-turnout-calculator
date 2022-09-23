@@ -4,8 +4,19 @@ import Grid from "@mui/material/Grid";
 import classnames from "classnames";
 
 import "./styles/app.scss";
+import { FormControl, MenuItem, Select } from "@mui/material";
 
 const voterData = {
+  2020: {
+    demCandidate: {
+      name: "Biden",
+      votes: 5244886,
+    },
+    repCandidate: {
+      name: "Trump",
+      votes: 3251997,
+    },
+  },
   2018: {
     demCandidate: {
       name: "Cuomo",
@@ -16,12 +27,29 @@ const voterData = {
       votes: 2207602,
     },
   },
+  2016: {
+    demCandidate: {
+      name: "Clinton",
+      votes: 4556124,
+    },
+    repCandidate: {
+      name: "Trump",
+      votes: 2819534,
+    },
+  },
 };
 
-const VoteSlider = ({ sliderPositions, handleChange, candidateType }) => {
+const VoteSlider = ({
+  sliderPositions,
+  handleChange,
+  candidateType,
+  pastElectionYear,
+}) => {
   return (
     <Grid item xs={3}>
-      <p>{voterData[2018][candidateType].name}'s voters are split:</p>
+      <p>
+        {voterData[pastElectionYear][candidateType].name}'s voters are split:
+      </p>
       <p
         className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
       >
@@ -62,15 +90,34 @@ const VoteSlider = ({ sliderPositions, handleChange, candidateType }) => {
   );
 };
 
+const PastElectionSelector = ({ pastElection, handleElectionSelection }) => (
+  <FormControl>
+    <Select
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={pastElection}
+      label="Past Election Year"
+      InputLabelProps={{ shrink: false }}
+      onChange={handleElectionSelection}
+    >
+      <MenuItem value="2020">2020 Presidential Election</MenuItem>
+      <MenuItem value="2018">2018 Gubernatorial Election</MenuItem>
+      <MenuItem value="2016">2016 Presidential Election</MenuItem>
+    </Select>
+  </FormControl>
+);
+
 const calculateTotalVotes = (
   candidateType,
+  pastElectionYear,
   sliderPositions,
   opposingSliderPositions
 ) => {
   const opposingPartyType =
     candidateType === "demCandidate" ? "repCandidate" : "demCandidate";
-  const samePartyVotes = voterData[2018][candidateType].votes;
-  const opposingPartyVotes = voterData[2018][opposingPartyType].votes;
+  const samePartyVotes = voterData[pastElectionYear][candidateType].votes;
+  const opposingPartyVotes =
+    voterData[pastElectionYear][opposingPartyType].votes;
 
   return (
     (samePartyVotes * (100 - sliderPositions[1])) / 100 +
@@ -100,13 +147,21 @@ const App = () => {
     setRepSliderPositions(newValue);
   };
 
+  const [pastElectionYear, setPastElectionYear] = React.useState("2018");
+
+  const handleElectionSelection = (event) => {
+    setPastElectionYear(event.target.value);
+  };
+
   const votesForDemocrat = calculateTotalVotes(
     "demCandidate",
+    pastElectionYear,
     demSliderPositions,
     repSliderPositions
   );
   const votesForRepublican = calculateTotalVotes(
     "repCandidate",
+    pastElectionYear,
     repSliderPositions,
     demSliderPositions
   );
@@ -114,7 +169,13 @@ const App = () => {
   return (
     <div className="app">
       <h1>Voter Turnout Prediction Calculator</h1>
-      <h2>Based on results from the 2018 gubernatorial election</h2>
+      <h2>
+        Based on results from the{" "}
+        <PastElectionSelector
+          pastElectionYear={pastElectionYear}
+          handleElectionSelection={handleElectionSelection}
+        />
+      </h2>
       <Grid container spacing={2}>
         <Grid item xs={1}>
           <h2>IF:</h2>
@@ -123,6 +184,7 @@ const App = () => {
           sliderPositions={demSliderPositions}
           handleChange={handleDemChange}
           candidateType="demCandidate"
+          pastElectionYear={pastElectionYear}
         />
         <Grid item xs={3}>
           {votesForDemocrat >= votesForRepublican ? (
@@ -141,6 +203,7 @@ const App = () => {
           sliderPositions={repSliderPositions}
           handleChange={handleRepChange}
           candidateType="repCandidate"
+          pastElectionYear={pastElectionYear}
         />
       </Grid>
     </div>
