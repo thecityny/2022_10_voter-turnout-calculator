@@ -49,7 +49,8 @@ const VoteSlider = ({
   return (
     <Grid
       item
-      xs={3}
+      xs={5}
+      sm={3}
       className="description slider-text"
       display="flex"
       flexDirection="column"
@@ -144,6 +145,38 @@ const calculateTotalVotes = (
   );
 };
 
+const ElectionWinnerBanner = ({
+  votesForDemocrat,
+  votesForRepublican,
+  isOnMobile,
+}) => (
+  <Grid
+    item
+    className="election-winner"
+    xs={12}
+    sm={5}
+    alignItems="center"
+    justifyContent="center"
+    display={
+      isOnMobile ? { xs: "flex", sm: "none" } : { xs: "none", sm: "flex" }
+    }
+  >
+    <Box textAlign="center">
+      {votesForDemocrat >= votesForRepublican ? (
+        <h1 className="color-dem">Hochul wins</h1>
+      ) : (
+        <h1 className="color-rep">Zeldin wins</h1>
+      )}
+      <p className="description">
+        {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
+      </p>
+      <p className="description">
+        {Math.round(votesForRepublican).toLocaleString()} votes for Zeldin.
+      </p>
+    </Box>
+  </Grid>
+);
+
 const App = () => {
   /**
    * This state holds the positions of the two break points on the slider widget
@@ -203,34 +236,22 @@ const App = () => {
           candidateType="demCandidate"
           pastElectionYear={pastElectionYear}
         />
-        <Grid
-          item
-          className="election-winner"
-          xs={5}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box textAlign="center">
-            {votesForDemocrat >= votesForRepublican ? (
-              <h1 className="color-dem">Hochul wins</h1>
-            ) : (
-              <h1 className="color-rep">Zeldin wins</h1>
-            )}
-            <p className="description">
-              {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
-            </p>
-            <p className="description">
-              {Math.round(votesForRepublican).toLocaleString()} votes for
-              Zeldin.
-            </p>
-          </Box>
-        </Grid>
+
+        <ElectionWinnerBanner
+          votesForDemocrat={votesForDemocrat}
+          votesForRepublican={votesForRepublican}
+        />
+
         <VoteSlider
           sliderPositions={repSliderPositions}
           handleChange={handleRepChange}
           candidateType="repCandidate"
           pastElectionYear={pastElectionYear}
+        />
+        <ElectionWinnerBanner
+          votesForDemocrat={votesForDemocrat}
+          votesForRepublican={votesForRepublican}
+          isOnMobile
         />
       </Grid>
     </div>
