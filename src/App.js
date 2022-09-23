@@ -49,7 +49,7 @@ const VoteSlider = ({
   return (
     <Grid
       item
-      xs={5}
+      xs={6}
       sm={3}
       className="description slider-text"
       display="flex"
@@ -63,13 +63,13 @@ const VoteSlider = ({
         )}
       >
         <p>
-          {`${voterData[pastElectionYear][candidateType].name}'s voters are split`}
+          {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
         </p>
         <Slider
           data-size={sliderPositions[0]}
           orientation="vertical"
           sx={{
-            height: 300,
+            height: { sm: 300, xs: 200 },
             '& input[type="range"]': {
               WebkitAppearance: "slider-vertical",
             },
@@ -154,7 +154,7 @@ const ElectionWinnerBanner = ({
     item
     className="election-winner"
     xs={12}
-    sm={5}
+    sm={6}
     alignItems="center"
     justifyContent="center"
     display={
@@ -227,9 +227,6 @@ const App = () => {
         />
       </h2>
       <Grid container spacing={2}>
-        <Grid item>
-          <p className="description">If</p>
-        </Grid>
         <VoteSlider
           sliderPositions={demSliderPositions}
           handleChange={handleDemChange}

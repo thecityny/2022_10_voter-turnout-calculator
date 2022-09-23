@@ -62,14 +62,27 @@ $default-font: "Sharp Grotesk", Helvetica, sans-serif;
 
 // Material UI Overrides:
 
+.app {
+  > .title {
+    margin-bottom: 0rem;
+  }
+  > .description {
+    margin-top: 0rem;
+    line-height: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
 // Remove special label on selector:
 .MuiInputBase-formControl fieldset legend {
   display: none;
 }
 
 .past-election-selector {
-  margin-left: 0.25rem;
-  transform: translateY(-0.25rem);
+  margin-left: 0.3rem;
+  margin-bottom: 0.3rem;
   .MuiSelect-select {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
