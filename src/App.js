@@ -187,7 +187,7 @@ const App = () => {
         />
       </h2>
       <Grid container spacing={2}>
-        <Grid item xs={0.5}>
+        <Grid item>
           <p className="description">If</p>
         </Grid>
         <VoteSlider
@@ -196,17 +196,24 @@ const App = () => {
           candidateType="demCandidate"
           pastElectionYear={pastElectionYear}
         />
-        <Grid item xs={5} display="flex" alignItems="center">
+        <Grid
+          item
+          className="election-winner"
+          xs={5}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Box>
             {votesForDemocrat >= votesForRepublican ? (
               <h1 className="color-dem">Hochul wins</h1>
             ) : (
               <h1 className="color-rep">Zeldin wins</h1>
             )}
-            <p>
+            <p className="description">
               {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
             </p>
-            <p>
+            <p className="description">
               {Math.round(votesForRepublican).toLocaleString()} votes for
               Zeldin.
             </p>
