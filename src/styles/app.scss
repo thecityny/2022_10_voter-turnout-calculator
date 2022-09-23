@@ -1,8 +1,5 @@
 @import "_fonts.scss";
 
-/*
- * Colors
- */
 $city-white: #ebebeb;
 $city-grey: #8c8c8c;
 $city-black: #111111;
@@ -14,9 +11,43 @@ $city-gold: #fcc32c;
 $city-politics-red: #d02d3c;
 $city-politics-blue: #214da5;
 
+// Default App Theme:
+
+$default-font: "Sharp Grotesk", Helvetica, sans-serif;
+
 .app {
-  font-family: "Sharp Grotesk", Helvetica, sans-serif;
+  font-family: $default-font;
   padding: 1rem;
+  background-color: #ebebeb;
+
+  // TEXT:
+
+  .title {
+    font: 900 1.375rem $default-font;
+    color: #000;
+  }
+
+  .description {
+    font: 400 0.875rem $default-font;
+    color: #333;
+  }
+
+  .small-text {
+    font: 200 0.635rem $default-font;
+    color: #000;
+  }
+
+  .label {
+    font: 400 0.75rem $default-font;
+    color: #666;
+  }
+
+  .annotation {
+    font-size: 200 0.75rem $default-font;
+    color: #333;
+  }
+
+  // COLORS:
 
   .color-dem {
     color: $city-politics-blue;
@@ -29,8 +60,24 @@ $city-politics-blue: #214da5;
 
 // Material UI Overrides:
 
+// Remove special label on selector:
 .MuiInputBase-formControl fieldset legend {
   display: none;
+}
+
+.past-election-selector {
+  margin-left: 0.25rem;
+  transform: translateY(-0.25rem);
+  .MuiSelect-select {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+  }
+}
+
+li.MuiMenuItem-root {
+  font: 400 0.875rem $default-font;
+  color: #333;
 }
 
 @mixin slider($type) {

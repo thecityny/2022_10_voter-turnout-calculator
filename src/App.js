@@ -93,16 +93,24 @@ const VoteSlider = ({
 const PastElectionSelector = ({ pastElection, handleElectionSelection }) => (
   <FormControl>
     <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
+      labelId="past-election-selector"
+      id="past-election-selector"
+      className="description past-election-selector"
       value={pastElection}
+      defaultValue="2018"
       label="Past Election Year"
       InputLabelProps={{ shrink: false }}
       onChange={handleElectionSelection}
     >
-      <MenuItem value="2020">2020 Presidential Election</MenuItem>
-      <MenuItem value="2018">2018 Gubernatorial Election</MenuItem>
-      <MenuItem value="2016">2016 Presidential Election</MenuItem>
+      <MenuItem value="2020" className="description">
+        2020 Presidential Election
+      </MenuItem>
+      <MenuItem value="2018" className="description">
+        2018 Gubernatorial Election
+      </MenuItem>
+      <MenuItem value="2016" className="description">
+        2016 Presidential Election
+      </MenuItem>
     </Select>
   </FormControl>
 );
@@ -168,8 +176,8 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Voter Turnout Prediction Calculator</h1>
-      <h2>
+      <h1 className="title">Voter Turnout Prediction Calculator</h1>
+      <h2 className="description">
         Based on results from the{" "}
         <PastElectionSelector
           pastElectionYear={pastElectionYear}
