@@ -7,6 +7,9 @@ import "./styles/app.scss";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { Box } from "@mui/system";
 
+import hochulPic from "./assets/images/hochul.jpeg";
+import zeldinPic from "./assets/images/zeldin.jpeg";
+
 const voterData = {
   2020: {
     demCandidate: {
@@ -109,7 +112,6 @@ const PastElectionSelector = ({ pastElection, handleElectionSelection }) => (
       value={pastElection}
       defaultValue="2018"
       label="Past Election Year"
-      InputLabelProps={{ shrink: false }}
       onChange={handleElectionSelection}
     >
       <MenuItem value="2020" className="description">
@@ -163,9 +165,35 @@ const ElectionWinnerBanner = ({
   >
     <Box textAlign="center">
       {votesForDemocrat >= votesForRepublican ? (
-        <h1 className="color-dem">Hochul wins</h1>
+        <>
+          <Box
+            className="color-dem"
+            component="img"
+            sx={{
+              height: { xs: 75, sm: 150 },
+              width: { xs: 75, sm: 150 },
+            }}
+            borderRadius={100}
+            alt="Kathy Hochul"
+            src={hochulPic}
+          />
+          <h1 className="color-dem">Hochul wins</h1>
+        </>
       ) : (
-        <h1 className="color-rep">Zeldin wins</h1>
+        <>
+          <Box
+            className="color-rep"
+            component="img"
+            sx={{
+              height: { xs: 75, sm: 150 },
+              width: { xs: 75, sm: 150 },
+            }}
+            borderRadius={100}
+            alt="Lee Zeldin"
+            src={zeldinPic}
+          />
+          <h1 className="color-rep">Zeldin wins</h1>
+        </>
       )}
       <p className="description">
         {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
