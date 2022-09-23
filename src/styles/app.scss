@@ -18,9 +18,6 @@ $city-politics-blue: #214da5;
   font-family: "Sharp Grotesk", Helvetica, sans-serif;
   padding: 1rem;
 
-  p {
-  }
-
   .color-dem {
     color: $city-politics-blue;
   }
@@ -32,30 +29,43 @@ $city-politics-blue: #214da5;
 
 // Material UI Overrides:
 
-.dem-slider {
+@mixin slider($type) {
+  .MuiSlider-thumb {
+    border-radius: 5%;
+    height: 5px;
+    width: 40px;
+    color: $city-grey;
+  }
+
   .MuiSlider-track {
-    color: $city-politics-red;
+    width: 15px;
+    border: none;
+
+    @if $type == dem {
+      color: $city-politics-red;
+    } @else {
+      color: $city-politics-blue;
+    }
   }
 
   .MuiSlider-rail {
-    color: $city-politics-blue;
+    width: 15px;
     opacity: 1;
+
+    @if $type == dem {
+      color: $city-politics-blue;
+    } @else {
+      color: $city-politics-red;
+    }
   }
+}
+
+.dem-slider {
+  @include slider(dem);
 }
 
 .rep-slider {
-  .MuiSlider-track {
-    color: $city-politics-blue;
-  }
-
-  .MuiSlider-rail {
-    color: $city-politics-red;
-    opacity: 1;
-  }
-}
-
-.MuiSlider-thumb {
-  color: $city-grey;
+  @include slider(rep);
 }
 
 @for $i from 1 through 100 {
@@ -64,18 +74,16 @@ $city-politics-blue: #214da5;
       background: linear-gradient(
         180deg,
         $city-politics-blue (100 - $i) * 1%,
-        black (100 - $i) * 1%
+        $city-grey (100 - $i) * 1%
       );
-      opacity: 1;
     }
 
     &.rep-slider .MuiSlider-rail {
       background: linear-gradient(
         180deg,
         $city-politics-red (100 - $i) * 1%,
-        black (100 - $i) * 1%
+        $city-grey (100 - $i) * 1%
       );
-      opacity: 1;
     }
   }
 }

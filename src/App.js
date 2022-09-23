@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 import Grid from "@mui/material/Grid";
+import classnames from "classnames";
 
 import "./styles/app.scss";
 
@@ -15,6 +16,50 @@ const voterData = {
       votes: 2207602,
     },
   },
+};
+
+const VoteSlider = ({ sliderPositions, handleChange, candidateType }) => {
+  return (
+    <Grid item xs={3}>
+      <p>{voterData[2018][candidateType].name}'s voters are split:</p>
+      <p
+        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
+      >
+        {100 - sliderPositions[1]}% for{" "}
+        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
+      </p>
+      <p
+        className={candidateType === "demCandidate" ? "color-rep" : "color-dem"}
+      >
+        {sliderPositions[1] - sliderPositions[0]}% for{" "}
+        {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
+      </p>
+      <p>{sliderPositions[0]}% don't vote</p>
+      <Slider
+        data-size={sliderPositions[0]}
+        orientation="vertical"
+        className={classnames(
+          candidateType === "demCandidate" ? "dem-slider" : "rep-slider",
+          `slider-position-${sliderPositions[0]}`
+        )}
+        sx={{
+          height: 300,
+          '& input[type="range"]': {
+            WebkitAppearance: "slider-vertical",
+          },
+        }}
+        value={sliderPositions}
+        onChange={handleChange}
+        valueLabelDisplay="off"
+        marks={[
+          {
+            value: 100,
+            label: "100%",
+          },
+        ]}
+      />
+    </Grid>
+  );
 };
 
 const App = () => {
@@ -57,28 +102,12 @@ const App = () => {
         <Grid item xs={1}>
           <h2>IF:</h2>
         </Grid>
-        <Grid item xs={3}>
-          <p>{voterData[2018].demCandidate.name}'s voters are split:</p>
-          <p className="color-dem">{100 - demSliderPositions[1]}% for Hochul</p>
-          <p className="color-rep">
-            {demSliderPositions[1] - demSliderPositions[0]}% for Zeldin
-          </p>
-          <p>{demSliderPositions[0]}% don't vote</p>
-          <Slider
-            data-size={demSliderPositions[0]}
-            orientation="vertical"
-            className={`dem-slider slider-position-${demSliderPositions[0]}`}
-            sx={{
-              height: 300,
-              '& input[type="range"]': {
-                WebkitAppearance: "slider-vertical",
-              },
-            }}
-            value={demSliderPositions}
-            onChange={handleDemChange}
-            valueLabelDisplay="off"
-          />
-        </Grid>
+        <VoteSlider
+          sliderPositions={demSliderPositions}
+          handleChange={handleDemChange}
+          candidateName={voterData[2018].demCandidate.name}
+          candidateType="demCandidate"
+        />
         <Grid item xs={3}>
           {votesForDemocrat >= votesForRepublican ? (
             <h1 className="color-dem">Hochul wins</h1>
@@ -92,28 +121,12 @@ const App = () => {
             {Math.round(votesForRepublican).toLocaleString()} votes for Zeldin.
           </p>
         </Grid>
-        <Grid item xs={3}>
-          <p>{voterData[2018].repCandidate.name}''s voters are split:</p>
-          <p className="color-rep">{100 - repSliderPositions[1]}% for Zeldin</p>
-          <p className="color-dem">
-            {repSliderPositions[1] - repSliderPositions[0]}% for Hochul
-          </p>
-          <p>{repSliderPositions[0]}% don't vote</p>
-          <Slider
-            data-size={repSliderPositions[0]}
-            orientation="vertical"
-            className={`rep-slider slider-position-${repSliderPositions[0]}`}
-            sx={{
-              height: 300,
-              '& input[type="range"]': {
-                WebkitAppearance: "slider-vertical",
-              },
-            }}
-            value={repSliderPositions}
-            onChange={handleRepChange}
-            valueLabelDisplay="off"
-          />
-        </Grid>
+        <VoteSlider
+          sliderPositions={repSliderPositions}
+          handleChange={handleRepChange}
+          candidateName={voterData[2018].repCandidate.name}
+          candidateType="repCandidate"
+        />
       </Grid>
     </div>
   );
