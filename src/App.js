@@ -164,37 +164,29 @@ const ElectionWinnerBanner = ({
     }
   >
     <Box textAlign="center">
-      {votesForDemocrat >= votesForRepublican ? (
-        <>
-          <Box
-            className="color-dem"
-            component="img"
-            sx={{
-              height: { xs: 75, sm: 150 },
-              width: { xs: 75, sm: 150 },
-            }}
-            borderRadius={100}
-            alt="Kathy Hochul"
-            src={hochulPic}
-          />
-          <h1 className="color-dem">Hochul wins</h1>
-        </>
-      ) : (
-        <>
-          <Box
-            className="color-rep"
-            component="img"
-            sx={{
-              height: { xs: 75, sm: 150 },
-              width: { xs: 75, sm: 150 },
-            }}
-            borderRadius={100}
-            alt="Lee Zeldin"
-            src={zeldinPic}
-          />
-          <h1 className="color-rep">Zeldin wins</h1>
-        </>
-      )}
+      <Box
+        className={
+          votesForDemocrat >= votesForRepublican ? "color-dem" : "color-rep"
+        }
+        component="img"
+        sx={{
+          height: { xs: 75, sm: 150 },
+          width: { xs: 75, sm: 150 },
+        }}
+        borderRadius={100}
+        alt={
+          votesForDemocrat >= votesForRepublican ? "Kathy Hochul" : "Lee Zeldin"
+        }
+        src={votesForDemocrat >= votesForRepublican ? hochulPic : zeldinPic}
+      />
+      <h1
+        className={
+          votesForDemocrat >= votesForRepublican ? "color-dem" : "color-rep"
+        }
+      >
+        {votesForDemocrat >= votesForRepublican ? "Hochul wins" : "Zeldin wins"}
+      </h1>
+
       <p className="description">
         {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
       </p>
