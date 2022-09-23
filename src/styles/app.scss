@@ -80,7 +80,19 @@ li.MuiMenuItem-root {
   color: #333;
 }
 
+.slider-text {
+  text-align: center;
+  p:not(:last-child) {
+    margin-bottom: 0;
+  }
+  p:not(:first-child) {
+    margin-top: 0;
+  }
+}
+
 @mixin slider($type) {
+  margin: 1rem;
+
   .MuiSlider-thumb {
     border-radius: 5%;
     height: 5px;

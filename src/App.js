@@ -5,6 +5,7 @@ import classnames from "classnames";
 
 import "./styles/app.scss";
 import { FormControl, MenuItem, Select } from "@mui/material";
+import { Box } from "@mui/system";
 
 const voterData = {
   2020: {
@@ -46,23 +47,17 @@ const VoteSlider = ({
   pastElectionYear,
 }) => {
   return (
-    <Grid item xs={3}>
+    <Grid
+      item
+      xs={3}
+      className="description slider-text"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+    >
       <p>
-        {voterData[pastElectionYear][candidateType].name}'s voters are split:
+        {`${voterData[pastElectionYear][candidateType].name}'s voters are split`}
       </p>
-      <p
-        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
-      >
-        {100 - sliderPositions[1]}% for{" "}
-        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
-      </p>
-      <p
-        className={candidateType === "demCandidate" ? "color-rep" : "color-dem"}
-      >
-        {sliderPositions[1] - sliderPositions[0]}% for{" "}
-        {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
-      </p>
-      <p>{sliderPositions[0]}% don't vote</p>
       <Slider
         data-size={sliderPositions[0]}
         orientation="vertical"
@@ -79,13 +74,20 @@ const VoteSlider = ({
         value={sliderPositions}
         onChange={handleChange}
         valueLabelDisplay="off"
-        marks={[
-          {
-            value: 100,
-            label: "100%",
-          },
-        ]}
       />
+      <p
+        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
+      >
+        {100 - sliderPositions[1]}% for{" "}
+        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
+      </p>
+      <p
+        className={candidateType === "demCandidate" ? "color-rep" : "color-dem"}
+      >
+        {sliderPositions[1] - sliderPositions[0]}% for{" "}
+        {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
+      </p>
+      <p>{sliderPositions[0]}% don't vote</p>
     </Grid>
   );
 };
@@ -185,8 +187,8 @@ const App = () => {
         />
       </h2>
       <Grid container spacing={2}>
-        <Grid item xs={1}>
-          <h2>IF:</h2>
+        <Grid item xs={0.5}>
+          <p className="description">If</p>
         </Grid>
         <VoteSlider
           sliderPositions={demSliderPositions}
@@ -194,18 +196,21 @@ const App = () => {
           candidateType="demCandidate"
           pastElectionYear={pastElectionYear}
         />
-        <Grid item xs={3}>
-          {votesForDemocrat >= votesForRepublican ? (
-            <h1 className="color-dem">Hochul wins</h1>
-          ) : (
-            <h1 className="color-rep">Zeldin wins</h1>
-          )}
-          <p>
-            {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
-          </p>
-          <p>
-            {Math.round(votesForRepublican).toLocaleString()} votes for Zeldin.
-          </p>
+        <Grid item xs={5} display="flex" alignItems="center">
+          <Box>
+            {votesForDemocrat >= votesForRepublican ? (
+              <h1 className="color-dem">Hochul wins</h1>
+            ) : (
+              <h1 className="color-rep">Zeldin wins</h1>
+            )}
+            <p>
+              {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
+            </p>
+            <p>
+              {Math.round(votesForRepublican).toLocaleString()} votes for
+              Zeldin.
+            </p>
+          </Box>
         </Grid>
         <VoteSlider
           sliderPositions={repSliderPositions}
