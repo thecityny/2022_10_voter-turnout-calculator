@@ -62,6 +62,24 @@ const VoteSlider = ({ sliderPositions, handleChange, candidateType }) => {
   );
 };
 
+const calculateTotalVotes = (
+  candidateType,
+  sliderPositions,
+  opposingSliderPositions
+) => {
+  const opposingPartyType =
+    candidateType === "demCandidate" ? "repCandidate" : "demCandidate";
+  const samePartyVotes = voterData[2018][candidateType].votes;
+  const opposingPartyVotes = voterData[2018][opposingPartyType].votes;
+
+  return (
+    (samePartyVotes * (100 - sliderPositions[1])) / 100 +
+    (opposingPartyVotes *
+      Math.abs(opposingSliderPositions[0] - opposingSliderPositions[1])) /
+      100
+  );
+};
+
 const App = () => {
   /**
    * This state holds the positions of the two break points on the slider widget
@@ -82,17 +100,16 @@ const App = () => {
     setRepSliderPositions(newValue);
   };
 
-  const votesForDemocrat =
-    (voterData[2018].demCandidate.votes * (100 - demSliderPositions[1])) / 100 +
-    (voterData[2018].repCandidate.votes *
-      Math.abs(repSliderPositions[0] - repSliderPositions[1])) /
-      100;
-
-  const votesForRepublican =
-    (voterData[2018].repCandidate.votes * (100 - repSliderPositions[1])) / 100 +
-    (voterData[2018].demCandidate.votes *
-      Math.abs(demSliderPositions[0] - demSliderPositions[1])) /
-      100;
+  const votesForDemocrat = calculateTotalVotes(
+    "demCandidate",
+    demSliderPositions,
+    repSliderPositions
+  );
+  const votesForRepublican = calculateTotalVotes(
+    "repCandidate",
+    repSliderPositions,
+    demSliderPositions
+  );
 
   return (
     <div className="app">
