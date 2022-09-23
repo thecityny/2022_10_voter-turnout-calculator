@@ -105,7 +105,6 @@ const App = () => {
         <VoteSlider
           sliderPositions={demSliderPositions}
           handleChange={handleDemChange}
-          candidateName={voterData[2018].demCandidate.name}
           candidateType="demCandidate"
         />
         <Grid item xs={3}>
@@ -124,7 +123,6 @@ const App = () => {
         <VoteSlider
           sliderPositions={repSliderPositions}
           handleChange={handleRepChange}
-          candidateName={voterData[2018].repCandidate.name}
           candidateType="repCandidate"
         />
       </Grid>
