@@ -9,7 +9,9 @@ $city-green: #36c269;
 $city-blue: #0c71fa;
 $city-gold: #fcc32c;
 $city-politics-red: #d02d3c;
+$city-politics-red-light: #e5c5c7;
 $city-politics-blue: #214da5;
+$city-politics-blue-light: #c2cbdc;
 
 // Default App Theme:
 
@@ -91,7 +93,17 @@ li.MuiMenuItem-root {
 }
 
 @mixin slider($type) {
-  margin: 1rem;
+  padding: 0rem 0.5rem;
+
+  @if $type == dem {
+    background-color: $city-politics-blue-light;
+  } @else {
+    background-color: $city-politics-red-light;
+  }
+
+  .MuiSlider-root {
+    margin: 1rem;
+  }
 
   .MuiSlider-thumb {
     border-radius: 5%;

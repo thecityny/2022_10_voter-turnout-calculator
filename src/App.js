@@ -55,39 +55,46 @@ const VoteSlider = ({
       flexDirection="column"
       alignItems="center"
     >
-      <p>
-        {`${voterData[pastElectionYear][candidateType].name}'s voters are split`}
-      </p>
-      <Slider
-        data-size={sliderPositions[0]}
-        orientation="vertical"
+      <div
         className={classnames(
           candidateType === "demCandidate" ? "dem-slider" : "rep-slider",
           `slider-position-${sliderPositions[0]}`
         )}
-        sx={{
-          height: 300,
-          '& input[type="range"]': {
-            WebkitAppearance: "slider-vertical",
-          },
-        }}
-        value={sliderPositions}
-        onChange={handleChange}
-        valueLabelDisplay="off"
-      />
-      <p
-        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
       >
-        {100 - sliderPositions[1]}% for{" "}
-        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
-      </p>
-      <p
-        className={candidateType === "demCandidate" ? "color-rep" : "color-dem"}
-      >
-        {sliderPositions[1] - sliderPositions[0]}% for{" "}
-        {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
-      </p>
-      <p>{sliderPositions[0]}% don't vote</p>
+        <p>
+          {`${voterData[pastElectionYear][candidateType].name}'s voters are split`}
+        </p>
+        <Slider
+          data-size={sliderPositions[0]}
+          orientation="vertical"
+          sx={{
+            height: 300,
+            '& input[type="range"]': {
+              WebkitAppearance: "slider-vertical",
+            },
+          }}
+          value={sliderPositions}
+          onChange={handleChange}
+          valueLabelDisplay="off"
+        />
+        <p
+          className={
+            candidateType === "demCandidate" ? "color-dem" : "color-rep"
+          }
+        >
+          {100 - sliderPositions[1]}% for{" "}
+          {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
+        </p>
+        <p
+          className={
+            candidateType === "demCandidate" ? "color-rep" : "color-dem"
+          }
+        >
+          {sliderPositions[1] - sliderPositions[0]}% for{" "}
+          {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
+        </p>
+        <p>{sliderPositions[0]}% don't vote</p>
+      </div>
     </Grid>
   );
 };
@@ -142,12 +149,12 @@ const App = () => {
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPositions, setDemSliderPositions] = useState([30, 45]);
+  const [demSliderPositions, setDemSliderPositions] = useState([30, 40]);
 
   /**
    * This is a duplicate state but for the republican candidate.
    */
-  const [repSliderPositions, setRepSliderPositions] = useState([30, 45]);
+  const [repSliderPositions, setRepSliderPositions] = useState([30, 40]);
 
   const handleDemChange = (event, newValue) => {
     setDemSliderPositions(newValue);
@@ -204,7 +211,7 @@ const App = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Box>
+          <Box textAlign="center">
             {votesForDemocrat >= votesForRepublican ? (
               <h1 className="color-dem">Hochul wins</h1>
             ) : (
