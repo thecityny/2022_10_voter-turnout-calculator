@@ -1,6 +1,7 @@
 {
   "name": "react-template",
   "version": "0.1.0",
+  "homepage": "2022_10_voter-turnout-calculator",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
