@@ -39,5 +39,15 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- 
+      This is our script tag for enabling Pym.js. See: https://blog.apps.npr.org/pym.js/.
+    -->
+    <script
+      type="text/javascript"
+      src="https://pym.nprapps.org/pym.v1.min.js"
+    ></script>
+    <script>
+      var pymParent = new pym.Parent("root", "child.html", {});
+    </script>
   </body>
 </html>
