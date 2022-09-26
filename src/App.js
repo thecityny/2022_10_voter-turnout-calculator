@@ -68,19 +68,7 @@ const VoteSlider = ({
         <p>
           {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
         </p>
-        <Slider
-          data-size={sliderPositions[0]}
-          orientation="vertical"
-          sx={{
-            height: { sm: 300, xs: 200 },
-            '& input[type="range"]': {
-              WebkitAppearance: "slider-vertical",
-            },
-          }}
-          value={sliderPositions}
-          onChange={handleChange}
-          valueLabelDisplay="off"
-        />
+        <br />
         <p
           className={
             candidateType === "demCandidate" ? "color-dem" : "color-rep"
@@ -98,6 +86,19 @@ const VoteSlider = ({
           {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
         </p>
         <p>{sliderPositions[0]}% don't vote</p>
+        <Slider
+          data-size={sliderPositions[0]}
+          orientation="vertical"
+          sx={{
+            height: { sm: 300, xs: 200 },
+            '& input[type="range"]': {
+              WebkitAppearance: "slider-vertical",
+            },
+          }}
+          value={sliderPositions}
+          onChange={handleChange}
+          valueLabelDisplay="off"
+        />
       </div>
     </Grid>
   );
