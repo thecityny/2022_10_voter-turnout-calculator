@@ -5,6 +5,7 @@ import "./styles/app.scss";
 import { PastElectionSelector } from "./components/ElectionSelector";
 import { ElectionWinnerBanner } from "./components/ElectionWinnerBanner";
 import { DoubleSlider, SingleSlider } from "./components/Sliders";
+import { useSearchParams } from "react-router-dom";
 
 export const voterData = {
   2020: {
@@ -230,4 +231,17 @@ export const VoterCalculatorSimple = ({
       </Grid>
     </div>
   );
+};
+
+export const App = () => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const param = queryParams.get("type");
+  if (!!param) {
+    return param === "defectors" ? (
+      <VoterCalculatorSimple showsPartyDefectors />
+    ) : (
+      <VoterCalculatorSimple />
+    );
+  }
+  return <VoterCalculator />;
 };
