@@ -125,40 +125,57 @@ li.MuiMenuItem-root {
   }
 
   .MuiSlider-root {
-    margin: 1rem;
     border-radius: 3px;
+    &.MuiSlider-vertical {
+      margin: 1rem;
+      .MuiSlider-track {
+        width: 15px;
+        border: none;
+        @if $type == dem {
+          color: $city-politics-red;
+        } @else {
+          color: $city-politics-blue;
+        }
+      }
+      .MuiSlider-rail {
+        width: 15px;
+        opacity: 1;
+        @if $type == dem {
+          color: $city-politics-blue;
+        } @else {
+          color: $city-politics-red;
+        }
+      }
+      .MuiSlider-thumb {
+        border-radius: 5%;
+        height: 5px;
+        width: 40px;
+      }
+    }
   }
 
   .MuiSlider-thumb {
-    border-radius: 5%;
-    height: 5px;
-    width: 40px;
     color: #666;
   }
 
   .MuiSlider-track {
-    width: 15px;
-    border: none;
-
     @if $type == dem {
-      color: $city-politics-red;
-    } @else {
       color: $city-politics-blue;
+    } @else {
+      color: $city-politics-red;
     }
   }
 
-  .only-show-one-party .MuiSlider-track {
+  .only-show-one-party .MuiSlider-rail {
     color: $city-grey;
   }
 
   .MuiSlider-rail {
-    width: 15px;
     opacity: 1;
-
     @if $type == dem {
-      color: $city-politics-blue;
-    } @else {
       color: $city-politics-red;
+    } @else {
+      color: $city-politics-blue;
     }
   }
 }

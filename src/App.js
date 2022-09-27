@@ -134,8 +134,8 @@ export const VoterCalculatorSimple = ({
   showsPartyDefectors,
 }) => {
   const defaultSliderPositions = {
-    dem: showsPartyDefectors ? 20 : 40,
-    rep: 0,
+    dem: showsPartyDefectors ? 80 : 60,
+    rep: 100,
   };
 
   /**
@@ -171,21 +171,21 @@ export const VoterCalculatorSimple = ({
     "demCandidate",
     pastElectionYear,
     showsPartyDefectors
-      ? [0, demSliderPosition]
-      : [demSliderPosition, demSliderPosition],
+      ? [0, 100 - demSliderPosition]
+      : [100 - demSliderPosition, 100 - demSliderPosition],
     showsPartyDefectors
-      ? [0, repSliderPosition]
-      : [repSliderPosition, repSliderPosition]
+      ? [0, 100 - repSliderPosition]
+      : [100 - repSliderPosition, 100 - repSliderPosition]
   );
   const votesForRepublican = calculateTotalVotes(
     "repCandidate",
     pastElectionYear,
     showsPartyDefectors
-      ? [0, repSliderPosition]
-      : [repSliderPosition, repSliderPosition],
+      ? [0, 100 - repSliderPosition]
+      : [100 - repSliderPosition, 100 - repSliderPosition],
     showsPartyDefectors
-      ? [0, demSliderPosition]
-      : [demSliderPosition, demSliderPosition]
+      ? [0, 100 - demSliderPosition]
+      : [100 - demSliderPosition, 100 - demSliderPosition]
   );
   return (
     <div className="app">
@@ -210,17 +210,17 @@ export const VoterCalculatorSimple = ({
           showsPartyDefectors={showsPartyDefectors}
         />
 
-        <ElectionWinnerBanner
-          votesForDemocrat={votesForDemocrat}
-          votesForRepublican={votesForRepublican}
-        />
-
         <SingleSlider
           sliderPosition={repSliderPosition}
           handleChange={handleRepChange}
           candidateType="repCandidate"
           pastElectionYear={pastElectionYear}
           showsPartyDefectors={showsPartyDefectors}
+        />
+
+        <ElectionWinnerBanner
+          votesForDemocrat={votesForDemocrat}
+          votesForRepublican={votesForRepublican}
         />
         <ElectionWinnerBanner
           votesForDemocrat={votesForDemocrat}

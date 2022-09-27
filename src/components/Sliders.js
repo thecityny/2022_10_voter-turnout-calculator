@@ -14,51 +14,38 @@ export const SingleSlider = ({
    */
   showsPartyDefectors,
 }) => (
-  <Grid
-    item
-    xs={6}
-    sm={3}
-    className="description slider-text"
-    display="flex"
-    flexDirection="column"
-    alignItems="center"
-  >
+  <Grid item xs={12} className="description slider-text">
     <div
       className={classnames(
         candidateType === "demCandidate" ? "dem-slider" : "rep-slider"
       )}
     >
-      <p>
-        {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
-      </p>
       <br />
-      <p
-        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
-      >
-        {100 - sliderPosition}% for{" "}
-        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
-      </p>
-      {!!showsPartyDefectors ? (
-        <p
+      <p>
+        {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split:`}{" "}
+        <span
           className={
-            candidateType === "demCandidate" ? "color-rep" : "color-dem"
+            candidateType === "demCandidate" ? "color-dem" : "color-rep"
           }
         >
           {sliderPosition}% for{" "}
-          {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
-        </p>
-      ) : (
-        <p>{sliderPosition}% don't vote</p>
-      )}
+          {candidateType === "demCandidate" ? "Hochul" : "Zeldin"} {" | "}
+        </span>
+        {!!showsPartyDefectors ? (
+          <span
+            className={
+              candidateType === "demCandidate" ? "color-rep" : "color-dem"
+            }
+          >
+            {100 - sliderPosition}% for{" "}
+            {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
+          </span>
+        ) : (
+          <span>{100 - sliderPosition}% don't vote</span>
+        )}
+      </p>
       <Slider
-        orientation="vertical"
         className={classnames(!showsPartyDefectors && "only-show-one-party")}
-        sx={{
-          height: { sm: 300, xs: 200 },
-          '& input[type="range"]': {
-            WebkitAppearance: "slider-vertical",
-          },
-        }}
         value={sliderPosition}
         onChange={handleChange}
         valueLabelDisplay="off"
