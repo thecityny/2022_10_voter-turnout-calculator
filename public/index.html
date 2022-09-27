@@ -40,14 +40,15 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <!-- 
-      This is our script tag for enabling Pym.js. See: https://blog.apps.npr.org/pym.js/.
+      This is our script tag for enabling the responsive embed of this app 
+      within an iframe using Pym.js. See: https://blog.apps.npr.org/pym.js/.
     -->
     <script
       type="text/javascript"
       src="https://pym.nprapps.org/pym.v1.min.js"
     ></script>
     <script>
-      var pymParent = new pym.Parent("root", "child.html", {});
+      var pymChild = new pym.Child();
     </script>
   </body>
 </html>
