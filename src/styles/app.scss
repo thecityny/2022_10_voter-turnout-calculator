@@ -63,6 +63,10 @@ body {
   .color-rep {
     color: $city-politics-red;
   }
+
+  .color-grey {
+    color: $city-grey;
+  }
 }
 
 // SECTION 1:
@@ -126,8 +130,10 @@ li.MuiMenuItem-root {
 
   .MuiSlider-root {
     border-radius: 3px;
+    width: 90%;
     &.MuiSlider-vertical {
       margin: 1rem;
+      width: unset;
       .MuiSlider-track {
         width: 15px;
         border: none;
@@ -211,6 +217,12 @@ li.MuiMenuItem-root {
 // Election winner banner:
 
 .election-winner {
+  &.MuiGrid-root {
+    @media screen and (max-width: 600px) {
+      margin-top: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  }
   h1 {
     margin-top: 0.5rem;
     margin-bottom: 1rem;

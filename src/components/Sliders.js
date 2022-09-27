@@ -23,6 +23,7 @@ export const SingleSlider = ({
       <br />
       <p>
         {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split:`}{" "}
+        <br />
         <span
           className={
             candidateType === "demCandidate" ? "color-dem" : "color-rep"
