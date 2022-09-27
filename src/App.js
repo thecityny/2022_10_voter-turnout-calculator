@@ -33,7 +33,69 @@ const voterData = {
   },
 };
 
-const VoteSlider = ({
+const SingleSlider = ({
+  sliderPosition,
+  handleChange,
+  candidateType,
+  pastElectionYear,
+  /** A boolean that defines Whether or not the simple slider shows votes that switch parties (if TRUE),
+   * or non-voters (if FALSE or undefined).
+   */
+  showsPartyDefectors,
+}) => (
+  <Grid
+    item
+    xs={6}
+    sm={3}
+    className="description slider-text"
+    display="flex"
+    flexDirection="column"
+    alignItems="center"
+  >
+    <div
+      className={classnames(
+        candidateType === "demCandidate" ? "dem-slider" : "rep-slider"
+      )}
+    >
+      <p>
+        {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
+      </p>
+      <br />
+      <p
+        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
+      >
+        {100 - sliderPosition}% for{" "}
+        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
+      </p>
+      {!!showsPartyDefectors ? (
+        <p
+          className={
+            candidateType === "demCandidate" ? "color-rep" : "color-dem"
+          }
+        >
+          {sliderPosition}% for{" "}
+          {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
+        </p>
+      ) : (
+        <p>{sliderPosition}% don't vote</p>
+      )}
+      <Slider
+        orientation="vertical"
+        sx={{
+          height: { sm: 300, xs: 200 },
+          '& input[type="range"]': {
+            WebkitAppearance: "slider-vertical",
+          },
+        }}
+        value={sliderPosition}
+        onChange={handleChange}
+        valueLabelDisplay="off"
+      />
+    </div>
+  </Grid>
+);
+
+const DoubleSlider = ({
   sliderPositions,
   handleChange,
   candidateType,
@@ -185,7 +247,7 @@ const ElectionWinnerBanner = ({
   </Grid>
 );
 
-const App = () => {
+export const VoterCalculator = () => {
   /**
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
@@ -235,7 +297,7 @@ const App = () => {
         />
       </h2>
       <Grid container spacing={2}>
-        <VoteSlider
+        <DoubleSlider
           sliderPositions={demSliderPositions}
           handleChange={handleDemChange}
           candidateType="demCandidate"
@@ -247,7 +309,7 @@ const App = () => {
           votesForRepublican={votesForRepublican}
         />
 
-        <VoteSlider
+        <DoubleSlider
           sliderPositions={repSliderPositions}
           handleChange={handleRepChange}
           candidateType="repCandidate"
@@ -263,4 +325,81 @@ const App = () => {
   );
 };
 
-export default App;
+export const VoterCalculatorSimple = () => {
+  /**
+   * This state holds the positions of the two break points on the slider widget
+   * for the democratic candidate.
+   */
+  const [demSliderPosition, setDemSliderPosition] = useState([50]);
+
+  /**
+   * This is a duplicate state but for the republican candidate.
+   */
+  const [repSliderPosition, setRepSliderPosition] = useState([50]);
+
+  const handleDemChange = (event, newValue) => {
+    setDemSliderPosition(newValue);
+  };
+
+  const handleRepChange = (event, newValue) => {
+    setRepSliderPosition(newValue);
+  };
+
+  const [pastElectionYear, setPastElectionYear] = React.useState("2018");
+
+  const handleElectionSelection = (event) => {
+    setPastElectionYear(event.target.value);
+  };
+
+  const votesForDemocrat = calculateTotalVotes(
+    "demCandidate",
+    pastElectionYear,
+    [0, demSliderPosition],
+    [0, repSliderPosition]
+  );
+  const votesForRepublican = calculateTotalVotes(
+    "repCandidate",
+    pastElectionYear,
+    [0, repSliderPosition],
+    [0, demSliderPosition]
+  );
+  return (
+    <div className="app">
+      <h1 className="title">Voter Turnout Prediction Calculator</h1>
+      <h2 className="description">
+        Based on results from the{" "}
+        <PastElectionSelector
+          pastElectionYear={pastElectionYear}
+          handleElectionSelection={handleElectionSelection}
+        />
+      </h2>
+      <Grid container spacing={2}>
+        <SingleSlider
+          sliderPosition={demSliderPosition}
+          handleChange={handleDemChange}
+          candidateType="demCandidate"
+          pastElectionYear={pastElectionYear}
+          showsPartyDefectors
+        />
+
+        <ElectionWinnerBanner
+          votesForDemocrat={votesForDemocrat}
+          votesForRepublican={votesForRepublican}
+        />
+
+        <SingleSlider
+          sliderPosition={repSliderPosition}
+          handleChange={handleRepChange}
+          candidateType="repCandidate"
+          pastElectionYear={pastElectionYear}
+          showsPartyDefectors
+        />
+        <ElectionWinnerBanner
+          votesForDemocrat={votesForDemocrat}
+          votesForRepublican={votesForRepublican}
+          isOnMobile
+        />
+      </Grid>
+    </div>
+  );
+};
