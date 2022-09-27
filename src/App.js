@@ -201,32 +201,37 @@ export const VoterCalculatorSimple = ({
           handleElectionSelection={handleElectionSelection}
         />
       </h2>
-      <Grid container spacing={2}>
-        <SingleSlider
-          sliderPosition={demSliderPosition}
-          handleChange={handleDemChange}
-          candidateType="demCandidate"
-          pastElectionYear={pastElectionYear}
-          showsPartyDefectors={showsPartyDefectors}
-        />
+      <Grid container>
+        <Grid container xs={12} sm={6} spacing={2}>
+          <SingleSlider
+            sliderPosition={demSliderPosition}
+            handleChange={handleDemChange}
+            candidateType="demCandidate"
+            pastElectionYear={pastElectionYear}
+            showsPartyDefectors={showsPartyDefectors}
+          />
 
-        <SingleSlider
-          sliderPosition={repSliderPosition}
-          handleChange={handleRepChange}
-          candidateType="repCandidate"
-          pastElectionYear={pastElectionYear}
-          showsPartyDefectors={showsPartyDefectors}
-        />
-
-        <ElectionWinnerBanner
-          votesForDemocrat={votesForDemocrat}
-          votesForRepublican={votesForRepublican}
-        />
-        <ElectionWinnerBanner
-          votesForDemocrat={votesForDemocrat}
-          votesForRepublican={votesForRepublican}
-          isOnMobile
-        />
+          <SingleSlider
+            sliderPosition={repSliderPosition}
+            handleChange={handleRepChange}
+            candidateType="repCandidate"
+            pastElectionYear={pastElectionYear}
+            showsPartyDefectors={showsPartyDefectors}
+          />
+        </Grid>
+        <Grid xs={12} sm={6} container spacing={2}>
+          <ElectionWinnerBanner
+            votesForDemocrat={votesForDemocrat}
+            votesForRepublican={votesForRepublican}
+            withSmallImage
+          />
+          <ElectionWinnerBanner
+            votesForDemocrat={votesForDemocrat}
+            votesForRepublican={votesForRepublican}
+            isOnMobile
+            withSmallImage
+          />
+        </Grid>
       </Grid>
     </div>
   );

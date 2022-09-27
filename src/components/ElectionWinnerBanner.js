@@ -9,12 +9,13 @@ export const ElectionWinnerBanner = ({
   votesForDemocrat,
   votesForRepublican,
   isOnMobile,
+  withSmallImage,
 }) => (
   <Grid
     item
     className="election-winner"
     xs={12}
-    sm={6}
+    sm={withSmallImage ? 12 : 6}
     alignItems="center"
     justifyContent="center"
     display={
@@ -27,10 +28,17 @@ export const ElectionWinnerBanner = ({
           votesForDemocrat >= votesForRepublican ? "color-dem" : "color-rep"
         }
         component="img"
-        sx={{
-          height: { xs: 75, sm: 150 },
-          width: { xs: 75, sm: 150 },
-        }}
+        sx={
+          withSmallImage
+            ? {
+                height: 75,
+                width: 75,
+              }
+            : {
+                height: { xs: 75, sm: 150 },
+                width: { xs: 75, sm: 150 },
+              }
+        }
         borderRadius={100}
         alt={
           votesForDemocrat >= votesForRepublican ? "Kathy Hochul" : "Lee Zeldin"
