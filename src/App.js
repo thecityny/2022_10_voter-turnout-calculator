@@ -235,7 +235,7 @@ export const VoterCalculatorSimple = ({
 export const App = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const param = queryParams.get("type");
-  //
+  // Use any querystring parameters in the page url to determine which viz to show:
   if (!!param) {
     return param === "defectors" ? (
       <VoterCalculatorSimple showsPartyDefectors />
