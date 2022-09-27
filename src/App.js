@@ -81,6 +81,7 @@ const SingleSlider = ({
       )}
       <Slider
         orientation="vertical"
+        className={classnames(!showsPartyDefectors && "only-show-one-party")}
         sx={{
           height: { sm: 300, xs: 200 },
           '& input[type="range"]': {
@@ -359,14 +360,22 @@ export const VoterCalculatorSimple = ({
   const votesForDemocrat = calculateTotalVotes(
     "demCandidate",
     pastElectionYear,
-    [0, demSliderPosition],
-    [0, repSliderPosition]
+    showsPartyDefectors
+      ? [0, demSliderPosition]
+      : [demSliderPosition, demSliderPosition],
+    showsPartyDefectors
+      ? [0, repSliderPosition]
+      : [repSliderPosition, repSliderPosition]
   );
   const votesForRepublican = calculateTotalVotes(
     "repCandidate",
     pastElectionYear,
-    [0, repSliderPosition],
-    [0, demSliderPosition]
+    showsPartyDefectors
+      ? [0, repSliderPosition]
+      : [repSliderPosition, repSliderPosition],
+    showsPartyDefectors
+      ? [0, demSliderPosition]
+      : [demSliderPosition, demSliderPosition]
   );
   return (
     <div className="app">

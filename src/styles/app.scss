@@ -145,6 +145,10 @@ li.MuiMenuItem-root {
     }
   }
 
+  .only-show-one-party .MuiSlider-track {
+    color: $city-grey;
+  }
+
   .MuiSlider-rail {
     width: 15px;
     opacity: 1;

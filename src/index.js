@@ -8,9 +8,10 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<VoterCalculator />} />
       <Route
-        path="/turnout"
+        path="/defectors"
         element={<VoterCalculatorSimple showsPartyDefectors />}
       />
+      <Route path="/turnout" element={<VoterCalculatorSimple />} />
     </Routes>
   </Router>,
 
