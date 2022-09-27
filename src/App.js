@@ -31,16 +31,6 @@ const voterData = {
       votes: 2207602,
     },
   },
-  2016: {
-    demCandidate: {
-      name: "Clinton",
-      votes: 4556124,
-    },
-    repCandidate: {
-      name: "Trump",
-      votes: 2819534,
-    },
-  },
 };
 
 const VoteSlider = ({
@@ -121,9 +111,6 @@ const PastElectionSelector = ({ pastElection, handleElectionSelection }) => (
       <MenuItem value="2018" className="description">
         2018 Gubernatorial Election
       </MenuItem>
-      <MenuItem value="2016" className="description">
-        2016 Presidential Election
-      </MenuItem>
     </Select>
   </FormControl>
 );
@@ -203,12 +190,12 @@ const App = () => {
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPositions, setDemSliderPositions] = useState([30, 40]);
+  const [demSliderPositions, setDemSliderPositions] = useState([10, 20]);
 
   /**
    * This is a duplicate state but for the republican candidate.
    */
-  const [repSliderPositions, setRepSliderPositions] = useState([30, 40]);
+  const [repSliderPositions, setRepSliderPositions] = useState([10, 20]);
 
   const handleDemChange = (event, newValue) => {
     setDemSliderPositions(newValue);
