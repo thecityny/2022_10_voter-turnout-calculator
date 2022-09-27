@@ -189,7 +189,11 @@ export const VoterCalculatorSimple = ({
   );
   return (
     <div className="app">
-      <h1 className="title">Voter Turnout Prediction Calculator</h1>
+      <h1 className="title">
+        {showsPartyDefectors
+          ? "How could voters switching parties determine the election?"
+          : "How could voter turnout determine the election?"}
+      </h1>
       <h2 className="description">
         Based on results from the{" "}
         <PastElectionSelector
