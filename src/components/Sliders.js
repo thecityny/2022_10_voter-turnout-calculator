@@ -73,6 +73,7 @@ export const DoubleSlider = ({
     >
       <div
         className={classnames(
+          "double-slider",
           candidateType === "demCandidate" ? "dem-slider" : "rep-slider",
           `slider-position-${sliderPositions[0]}`
         )}

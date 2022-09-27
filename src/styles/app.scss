@@ -122,10 +122,12 @@ li.MuiMenuItem-root {
 @mixin slider($type) {
   padding: 0rem 0.5rem;
 
-  @if $type == dem {
-    background-color: $city-politics-blue-light;
-  } @else {
-    background-color: $city-politics-red-light;
+  &.double-slider {
+    @if $type == dem {
+      background-color: $city-politics-blue-light;
+    } @else {
+      background-color: $city-politics-red-light;
+    }
   }
 
   .MuiSlider-root {
