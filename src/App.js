@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import Slider from "@mui/material/Slider";
 import Grid from "@mui/material/Grid";
-import classnames from "classnames";
-
 import "./styles/app.scss";
-import { FormControl, MenuItem, Select } from "@mui/material";
-import { Box } from "@mui/system";
 
-import hochulPic from "./assets/images/hochul.jpeg";
-import zeldinPic from "./assets/images/zeldin.jpeg";
+import { PastElectionSelector } from "./components/ElectionSelector";
+import { ElectionWinnerBanner } from "./components/ElectionWinnerBanner";
+import { DoubleSlider, SingleSlider } from "./components/Sliders";
 
-const voterData = {
+export const voterData = {
   2020: {
     demCandidate: {
       name: "Biden",
@@ -33,151 +29,6 @@ const voterData = {
   },
 };
 
-const SingleSlider = ({
-  sliderPosition,
-  handleChange,
-  candidateType,
-  pastElectionYear,
-  /** A boolean that defines Whether or not the simple slider shows votes that switch parties (if TRUE),
-   * or non-voters (if FALSE or undefined).
-   */
-  showsPartyDefectors,
-}) => (
-  <Grid
-    item
-    xs={6}
-    sm={3}
-    className="description slider-text"
-    display="flex"
-    flexDirection="column"
-    alignItems="center"
-  >
-    <div
-      className={classnames(
-        candidateType === "demCandidate" ? "dem-slider" : "rep-slider"
-      )}
-    >
-      <p>
-        {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
-      </p>
-      <br />
-      <p
-        className={candidateType === "demCandidate" ? "color-dem" : "color-rep"}
-      >
-        {100 - sliderPosition}% for{" "}
-        {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
-      </p>
-      {!!showsPartyDefectors ? (
-        <p
-          className={
-            candidateType === "demCandidate" ? "color-rep" : "color-dem"
-          }
-        >
-          {sliderPosition}% for{" "}
-          {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
-        </p>
-      ) : (
-        <p>{sliderPosition}% don't vote</p>
-      )}
-      <Slider
-        orientation="vertical"
-        className={classnames(!showsPartyDefectors && "only-show-one-party")}
-        sx={{
-          height: { sm: 300, xs: 200 },
-          '& input[type="range"]': {
-            WebkitAppearance: "slider-vertical",
-          },
-        }}
-        value={sliderPosition}
-        onChange={handleChange}
-        valueLabelDisplay="off"
-      />
-    </div>
-  </Grid>
-);
-
-const DoubleSlider = ({
-  sliderPositions,
-  handleChange,
-  candidateType,
-  pastElectionYear,
-}) => {
-  return (
-    <Grid
-      item
-      xs={6}
-      sm={3}
-      className="description slider-text"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-    >
-      <div
-        className={classnames(
-          candidateType === "demCandidate" ? "dem-slider" : "rep-slider",
-          `slider-position-${sliderPositions[0]}`
-        )}
-      >
-        <p>
-          {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
-        </p>
-        <br />
-        <p
-          className={
-            candidateType === "demCandidate" ? "color-dem" : "color-rep"
-          }
-        >
-          {100 - sliderPositions[1]}% for{" "}
-          {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
-        </p>
-        <p
-          className={
-            candidateType === "demCandidate" ? "color-rep" : "color-dem"
-          }
-        >
-          {sliderPositions[1] - sliderPositions[0]}% for{" "}
-          {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
-        </p>
-        <p>{sliderPositions[0]}% don't vote</p>
-        <Slider
-          data-size={sliderPositions[0]}
-          orientation="vertical"
-          sx={{
-            height: { sm: 300, xs: 200 },
-            '& input[type="range"]': {
-              WebkitAppearance: "slider-vertical",
-            },
-          }}
-          value={sliderPositions}
-          onChange={handleChange}
-          valueLabelDisplay="off"
-        />
-      </div>
-    </Grid>
-  );
-};
-
-const PastElectionSelector = ({ pastElection, handleElectionSelection }) => (
-  <FormControl>
-    <Select
-      labelId="past-election-selector"
-      id="past-election-selector"
-      className="description past-election-selector"
-      value={pastElection}
-      defaultValue="2018"
-      label="Past Election Year"
-      onChange={handleElectionSelection}
-    >
-      <MenuItem value="2020" className="description">
-        2020 Presidential Election
-      </MenuItem>
-      <MenuItem value="2018" className="description">
-        2018 Gubernatorial Election
-      </MenuItem>
-    </Select>
-  </FormControl>
-);
-
 const calculateTotalVotes = (
   candidateType,
   pastElectionYear,
@@ -197,56 +48,6 @@ const calculateTotalVotes = (
       100
   );
 };
-
-const ElectionWinnerBanner = ({
-  votesForDemocrat,
-  votesForRepublican,
-  isOnMobile,
-}) => (
-  <Grid
-    item
-    className="election-winner"
-    xs={12}
-    sm={6}
-    alignItems="center"
-    justifyContent="center"
-    display={
-      isOnMobile ? { xs: "flex", sm: "none" } : { xs: "none", sm: "flex" }
-    }
-  >
-    <Box textAlign="center">
-      <Box
-        className={
-          votesForDemocrat >= votesForRepublican ? "color-dem" : "color-rep"
-        }
-        component="img"
-        sx={{
-          height: { xs: 75, sm: 150 },
-          width: { xs: 75, sm: 150 },
-        }}
-        borderRadius={100}
-        alt={
-          votesForDemocrat >= votesForRepublican ? "Kathy Hochul" : "Lee Zeldin"
-        }
-        src={votesForDemocrat >= votesForRepublican ? hochulPic : zeldinPic}
-      />
-      <h1
-        className={
-          votesForDemocrat >= votesForRepublican ? "color-dem" : "color-rep"
-        }
-      >
-        {votesForDemocrat >= votesForRepublican ? "Hochul wins" : "Zeldin wins"}
-      </h1>
-
-      <p className="description">
-        {Math.round(votesForDemocrat).toLocaleString()} votes for Hochul.
-      </p>
-      <p className="description">
-        {Math.round(votesForRepublican).toLocaleString()} votes for Zeldin.
-      </p>
-    </Box>
-  </Grid>
-);
 
 export const VoterCalculator = () => {
   /**
