@@ -325,17 +325,22 @@ export const VoterCalculator = () => {
   );
 };
 
-export const VoterCalculatorSimple = () => {
+export const VoterCalculatorSimple = ({
+  /** A boolean that defines Whether or not the simple slider shows votes that switch parties (if TRUE),
+   * or non-voters (if FALSE or undefined).
+   */
+  showsPartyDefectors,
+}) => {
   /**
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPosition, setDemSliderPosition] = useState([50]);
+  const [demSliderPosition, setDemSliderPosition] = useState(50);
 
   /**
    * This is a duplicate state but for the republican candidate.
    */
-  const [repSliderPosition, setRepSliderPosition] = useState([50]);
+  const [repSliderPosition, setRepSliderPosition] = useState(50);
 
   const handleDemChange = (event, newValue) => {
     setDemSliderPosition(newValue);
@@ -379,7 +384,7 @@ export const VoterCalculatorSimple = () => {
           handleChange={handleDemChange}
           candidateType="demCandidate"
           pastElectionYear={pastElectionYear}
-          showsPartyDefectors
+          showsPartyDefectors={showsPartyDefectors}
         />
 
         <ElectionWinnerBanner
@@ -392,7 +397,7 @@ export const VoterCalculatorSimple = () => {
           handleChange={handleRepChange}
           candidateType="repCandidate"
           pastElectionYear={pastElectionYear}
-          showsPartyDefectors
+          showsPartyDefectors={showsPartyDefectors}
         />
         <ElectionWinnerBanner
           votesForDemocrat={votesForDemocrat}
