@@ -18,9 +18,12 @@ $city-politics-blue-light: #c2cbdc;
 
 $default-font: "Sharp Grotesk", Helvetica, sans-serif;
 
+body {
+  margin: 0;
+}
+
 .app {
   font-family: $default-font;
-  padding: 1rem;
   background-color: #ebebeb;
 
   // Text:
