@@ -253,7 +253,7 @@ export const VoterCalculator = () => {
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPositions, setDemSliderPositions] = useState([10, 20]);
+  const [demSliderPositions, setDemSliderPositions] = useState([40, 50]);
 
   /**
    * This is a duplicate state but for the republican candidate.
@@ -332,16 +332,25 @@ export const VoterCalculatorSimple = ({
    */
   showsPartyDefectors,
 }) => {
+  const defaultSliderPositions = {
+    dem: showsPartyDefectors ? 20 : 40,
+    rep: 0,
+  };
+
   /**
    * This state holds the positions of the two break points on the slider widget
    * for the democratic candidate.
    */
-  const [demSliderPosition, setDemSliderPosition] = useState(50);
+  const [demSliderPosition, setDemSliderPosition] = useState(
+    defaultSliderPositions.dem
+  );
 
   /**
    * This is a duplicate state but for the republican candidate.
    */
-  const [repSliderPosition, setRepSliderPosition] = useState(50);
+  const [repSliderPosition, setRepSliderPosition] = useState(
+    defaultSliderPositions.rep
+  );
 
   const handleDemChange = (event, newValue) => {
     setDemSliderPosition(newValue);

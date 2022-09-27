@@ -6,6 +6,7 @@ import { VoterCalculator, VoterCalculatorSimple } from "./App";
 ReactDOM.render(
   <Router>
     <Routes>
+      {/* Here is where we create all of the pages we're deploying: */}
       <Route path="/" element={<VoterCalculator />} />
       <Route
         path="/defectors"
