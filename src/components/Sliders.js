@@ -30,8 +30,9 @@ export const SingleSlider = ({
           }
         >
           {sliderPosition}% for{" "}
-          {candidateType === "demCandidate" ? "Hochul" : "Zeldin"} {" | "}
+          {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
         </span>
+        {" | "}
         {!!showsPartyDefectors ? (
           <span
             className={
