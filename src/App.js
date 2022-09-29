@@ -91,7 +91,8 @@ export const VoterCalculator = () => {
   return (
     <div className="app">
       <h1 className="title">
-        How could voter turnout and party switching determine the election?
+        How could voter turnout <em>and</em> party switching determine the
+        election?
       </h1>
       <h2 className="description">
         Based on results from the{" "}
