@@ -83,6 +83,16 @@ body {
     flex-wrap: wrap;
     align-items: center;
   }
+
+  /* Adds CSS3 animation */
+  .MuiSlider-thumb {
+    transition: left 1.5s;
+  }
+
+  /* Animating track with CSS3 as well */
+  .MuiSlider-track {
+    transition: width 1.5s;
+  }
 }
 
 // Election Data Selector:

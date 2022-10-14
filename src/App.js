@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Grid from "@mui/material/Grid";
 import "./styles/app.scss";
 
@@ -28,6 +28,28 @@ export const voterData = {
     },
   },
 };
+
+function useIsInViewport(ref) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(([entry]) =>
+        setIsIntersecting(entry.isIntersecting)
+      ),
+    []
+  );
+
+  useEffect(() => {
+    observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref, observer]);
+
+  return isIntersecting;
+}
 
 const calculateTotalVotes = (
   candidateType,
@@ -170,6 +192,9 @@ export const VoterCalculatorSimple = ({
     setPastElectionYear(event.target.value);
   };
 
+  const appRef = useRef(null);
+  const isInViewport = useIsInViewport(appRef);
+
   const votesForDemocrat = calculateTotalVotes(
     "demCandidate",
     pastElectionYear,
@@ -192,7 +217,7 @@ export const VoterCalculatorSimple = ({
   );
   return (
     <div className="app">
-      <h1 className="title">
+      <h1 className="title" ref={appRef}>
         {showsPartyDefectors
           ? "How could voters switching parties determine the election?"
           : "How could voter turnout determine the election?"}
@@ -207,7 +232,7 @@ export const VoterCalculatorSimple = ({
       <Grid container>
         <Grid container xs={12} sm={6} spacing={2}>
           <SingleSlider
-            sliderPosition={demSliderPosition}
+            sliderPosition={isInViewport ? demSliderPosition : 0}
             handleChange={handleDemChange}
             candidateType="demCandidate"
             pastElectionYear={pastElectionYear}
@@ -215,7 +240,7 @@ export const VoterCalculatorSimple = ({
           />
 
           <SingleSlider
-            sliderPosition={repSliderPosition}
+            sliderPosition={isInViewport ? repSliderPosition : 0}
             handleChange={handleRepChange}
             candidateType="repCandidate"
             pastElectionYear={pastElectionYear}
