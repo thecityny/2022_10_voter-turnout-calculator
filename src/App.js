@@ -29,13 +29,13 @@ export const voterData = {
   },
 };
 
-function useIsInViewport(ref) {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+function useHasEnteredViewport(ref) {
+  const [hasIntersected, setHasIntersected] = useState(false);
 
   const observer = useMemo(
     () =>
-      new IntersectionObserver(([entry]) =>
-        setIsIntersecting(entry.isIntersecting)
+      new IntersectionObserver(
+        ([entry]) => !!entry.isIntersecting && setHasIntersected(true)
       ),
     []
   );
@@ -48,7 +48,7 @@ function useIsInViewport(ref) {
     };
   }, [ref, observer]);
 
-  return isIntersecting;
+  return hasIntersected;
 }
 
 const calculateTotalVotes = (
@@ -193,7 +193,7 @@ export const VoterCalculatorSimple = ({
   };
 
   const appRef = useRef(null);
-  const isInViewport = useIsInViewport(appRef);
+  const isInViewport = useHasEnteredViewport(appRef);
 
   const votesForDemocrat = calculateTotalVotes(
     "demCandidate",
