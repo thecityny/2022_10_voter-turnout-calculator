@@ -137,6 +137,29 @@ li.MuiMenuItem-root {
     } @else {
       background-color: $city-politics-red-light;
     }
+
+    .MuiSlider-thumb:before {
+      content: "↕";
+      color: $city-black;
+      animation: hover-up-and-down 0.9s ease-in-out infinite;
+      box-shadow: none;
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+      font-family: serif;
+      margin-left: 3.4rem;
+    }
+  }
+
+  @keyframes hover-up-and-down {
+    0% {
+      transform: translateY(3px);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+    100% {
+      transform: translateY(3px);
+    }
   }
 
   .MuiSlider-root {
