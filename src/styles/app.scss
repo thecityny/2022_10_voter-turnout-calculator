@@ -152,13 +152,13 @@ li.MuiMenuItem-root {
 
   @keyframes hover-up-and-down {
     0% {
-      transform: translateY(3px);
+      transform: translateY(2.5px);
     }
     50% {
-      transform: translateY(-3px);
+      transform: translateY(-2.5px);
     }
     100% {
-      transform: translateY(3px);
+      transform: translateY(2.5px);
     }
   }
 
