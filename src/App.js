@@ -91,7 +91,7 @@ export const VoterCalculator = () => {
     setRepSliderPositions(newValue);
   };
 
-  const [pastElectionYear, setPastElectionYear] = React.useState("2018");
+  const [pastElectionYear, setPastElectionYear] = React.useState("2020");
 
   const handleElectionSelection = (event) => {
     setPastElectionYear(event.target.value);
@@ -159,7 +159,7 @@ export const VoterCalculatorSimple = ({
   showsPartyDefectors,
 }) => {
   const defaultSliderPositions = {
-    dem: showsPartyDefectors ? 80 : 60,
+    dem: showsPartyDefectors ? 81 : 62,
     rep: 100,
   };
 
@@ -186,7 +186,7 @@ export const VoterCalculatorSimple = ({
     setRepSliderPosition(newValue);
   };
 
-  const [pastElectionYear, setPastElectionYear] = React.useState("2018");
+  const [pastElectionYear, setPastElectionYear] = React.useState("2020");
 
   const handleElectionSelection = (event) => {
     setPastElectionYear(event.target.value);

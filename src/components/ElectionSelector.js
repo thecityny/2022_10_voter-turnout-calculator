@@ -11,7 +11,7 @@ export const PastElectionSelector = ({
       id="past-election-selector"
       className="description past-election-selector"
       value={pastElection}
-      defaultValue="2018"
+      defaultValue="2020"
       label="Past Election Year"
       onChange={handleElectionSelection}
     >
