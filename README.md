@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# 2022 Governor's Race: Voter Turnout Calculator
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
