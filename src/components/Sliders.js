@@ -22,14 +22,14 @@ export const SingleSlider = ({
     >
       <br />
       <p>
-        {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split:`}{" "}
+        {`Among past ${voterData[pastElectionYear][candidateType].name} voters, let's say`}{" "}
         <br />
         <span
           className={
             candidateType === "demCandidate" ? "color-dem" : "color-rep"
           }
         >
-          {sliderPosition}% for{" "}
+          {sliderPosition}% vote{" "}
           {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
         </span>
         {" | "}
@@ -39,7 +39,7 @@ export const SingleSlider = ({
               candidateType === "demCandidate" ? "color-rep" : "color-dem"
             }
           >
-            {100 - sliderPosition}% for{" "}
+            {100 - sliderPosition}% vote{" "}
             {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
           </span>
         ) : (
@@ -80,7 +80,7 @@ export const DoubleSlider = ({
         )}
       >
         <p>
-          {`If ${voterData[pastElectionYear][candidateType].name}'s voters are split`}
+          {`Among past ${voterData[pastElectionYear][candidateType].name} voters, let's say`}
         </p>
         <br />
         <p
@@ -88,7 +88,7 @@ export const DoubleSlider = ({
             candidateType === "demCandidate" ? "color-dem" : "color-rep"
           }
         >
-          {100 - sliderPositions[1]}% for{" "}
+          {100 - sliderPositions[1]}% vote{" "}
           {candidateType === "demCandidate" ? "Hochul" : "Zeldin"}
         </p>
         <p
@@ -96,7 +96,7 @@ export const DoubleSlider = ({
             candidateType === "demCandidate" ? "color-rep" : "color-dem"
           }
         >
-          {sliderPositions[1] - sliderPositions[0]}% for{" "}
+          {sliderPositions[1] - sliderPositions[0]}% vote{" "}
           {candidateType === "demCandidate" ? "Zeldin" : "Hochul"}
         </p>
         <p>{sliderPositions[0]}% don't vote</p>
