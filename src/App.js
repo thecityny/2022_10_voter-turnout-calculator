@@ -230,7 +230,7 @@ export const VoterCalculatorSimple = ({
         />
       </h2>
       <Grid container>
-        <Grid container xs={12} sm={6} spacing={2}>
+        <Grid container item xs={12} sm={6} spacing={2}>
           <SingleSlider
             sliderPosition={isInViewport ? demSliderPosition : 0}
             handleChange={handleDemChange}
@@ -247,7 +247,7 @@ export const VoterCalculatorSimple = ({
             showsPartyDefectors={showsPartyDefectors}
           />
         </Grid>
-        <Grid xs={12} sm={6} container spacing={2}>
+        <Grid item xs={12} sm={6} container spacing={2}>
           <ElectionWinnerBanner
             votesForDemocrat={votesForDemocrat}
             votesForRepublican={votesForRepublican}
