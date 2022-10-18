@@ -148,12 +148,6 @@ export const VoterCalculator = () => {
           isOnMobile
         />
       </Grid>
-      <br />
-      <br />
-      <div className="small-text">
-        Note: Simulation is based on turnout and voter behavior based on
-        previous elections and does not indicate election results.
-      </div>
     </div>
   );
 };
@@ -267,12 +261,6 @@ export const VoterCalculatorSimple = ({
           />
         </Grid>
       </Grid>
-      <br />
-      <br />
-      <div className="small-text">
-        Note: Simulation is based on turnout and voter behavior based on
-        previous elections and does not indicate election results.
-      </div>
     </div>
   );
 };

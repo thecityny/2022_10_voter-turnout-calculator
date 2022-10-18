@@ -23,11 +23,6 @@ body {
   padding: 1rem 0;
 }
 
-small {
-  font-weight: light;
-  font-size: 1rem;
-}
-
 .app {
   font-family: $default-font;
   background-color: #ebebeb;
@@ -46,7 +41,7 @@ small {
 
   .small-text {
     font: 200 0.635rem $default-font;
-    color: #666;
+    color: #000;
   }
 
   .label {
